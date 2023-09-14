@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+find . -name "* *" -type d | rename 's/ /_/g'
+find . -name "* *" -type f | rename 's/ /_/g'
+
+rm **/*embedded*
+rm **/*shotwell*
+
+
+shopt -s globstar
+for i in **/*; do # Whitespace-safe and recursive
+    exiv2 rename "$i"
+done
